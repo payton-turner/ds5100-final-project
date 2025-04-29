@@ -39,7 +39,7 @@ Pass a NumPy array to instantiate the Die class and create dice objects.
 * In this case, two dice were created to have 6 sides, each with equal weight.
 * Using the weigh() method, die2's face 6 was weighted to 5.
 * The current sides and respective weights can be checked with the state() method.
-
+git 
 ```python
 sides = np.array([1, 2, 3, 4, 5, 6])
 die1 = Die(sides)
@@ -88,60 +88,56 @@ For example, a fair “die” with N=2 is a coin, and a one with N=6 is a standa
 
 #### Attributes:
 
-* `sides` (NumPy array): Array of sides passed during initialization (can be strings or numbers).  
+* `sides` (NumPy array): Array of sides passed during initialization (can be strings or numbers).
 
 #### Methods:
 
 `__init__(sides: np.ndarray)`
 
-Docstring:  
-* Initializes the die with sides from a NumPy array and sets initial weights to 1.0 for each side.
+- Docstring:  
+    * Initializes the die with sides from a NumPy array and sets initial weights to 1.0 for each side.
 
-Parameters:
-* `sides` (`np.ndarray`): Array of sides as an argument, with data type as strings or numbers.
+- Parameters:
+    * `sides` (`np.ndarray`): Array of sides as an argument, with data type as strings or numbers.
 
-Returns:  
-* Initializes the die object with sides and equal initial weights.
-
----
+- Returns:  
+    * Initializes the die object with sides and equal initial weights.
 
 `weigh(side: Union[int, float, str], weight: Union[int, float])`
 
-Docstring:  
-* Change the weight of a single side.
+- Docstring:  
+    * Change the weight of a single side.
 
-Parameters:
-* `side` (`int`, `float`, or `str`): The side value to be changed.
-* `weight` (`int` or `float`): The new weight for the given side.
+- Parameters:
+    * `side` (`int`, `float`, or `str`): The side value to be changed.
+    * `weight` (`int` or `float`): The new weight for the given side.
 
-Returns:  
- * Nothing. Changes the weight of a single side.
-
----
+- Returns:  
+    * Nothing. Changes the weight of a single side.
 
 `roll(rolls: int = 1)`
 
-Docstring:  
-* Roll the die one or more times.
+- Docstring:  
+    * Roll the die one or more times.
 
-Parameters:
-* `rolls` (`int`, default=1): Number of times the die is to be rolled; defaults to  1.
+- Parameters:
+    * `rolls` (`int`, default=1): Number of times the die is to be rolled; defaults to  1.
 
-Returns:  
-* Returns a list of outcomes from the rolls. 
-
----
+- Returns:  
+    * Returns a list of outcomes from the rolls.
 
 `state()`
 
-Docstring:  
-* Show the die’s current state.
+- Docstring:  
+    * Show the die’s current state.
 
-Parameters:  
-* None.
+- Parameters:  
+    * None.
 
-Returns:  
-* A copy of the private die data frame.
+- Returns:  
+    * A copy of the private die data frame.
+
+---
 
 ### Class: `Game`
 
@@ -157,40 +153,38 @@ Similar dice means that each die in a given game has the same number of sides an
 
 `__init__(dice: list)`
 
-Docstring:  
-* Initializes the game with a list of Die objects.
+- Docstring:  
+    * Initializes the game with a list of Die objects.
 
-Parameters:
-* `dice` (list): A list of Die objects.
+- Parameters:
+    * `dice` (`list`): A list of Die objects.
 
-Returns:  
-* Initializes a new game object.
-
----
+- Returns:  
+    * Initializes a new game object.
 
 `play(plays: int)`
 
-Docstring:  
-* A method to play a number of games with the die.
+- Docstring:  
+    * A method to play a number of games with the die.
 
-Parameters:
-* `plays` (`int`): Takes an integer parameter to specify how many times the dice should be rolled.
+- Parameters:
+    * `plays` (`int`): Takes an integer parameter to specify how many times the dice should be rolled.
 
-Returns:  
-* Nothing. Updates the data frame with the game results.
-
----
+- Returns:  
+    * Nothing. Updates the data frame with the game results.
 
 `results(display: str = 'wide')`
 
-Docstring:  
-* Show the user the results of the most recent play.
+- Docstring:  
+    * Show the user the results of the most recent play.
 
-Parameters:
-* `display` (`str`, default='wide'): Takes a parameter ('narrow' or 'wide') to return the data frame in narrow or wide form.
+- Parameters:
+    * `display` (`str`, default='wide'): Takes a parameter ('narrow' or 'wide') to return the data frame in narrow or wide form.
 
-Returns:  
-* A copy of the private game data frame.
+- Returns:  
+    * A copy of the private game data frame.
+
+---
 
 ### Class: `Analyzer`
 
@@ -204,63 +198,55 @@ Takes the results of a single game and computes various descriptive statistical 
 
 `__init__(game: Game)`
 
-Docstring:  
-* Initializes the Analyzer with the results of a Game.
+- Docstring:  
+    * Initializes the Analyzer with the results of a Game.
 
-Parameters:
-* `game` (`Game`): A Game object that has already been played.
+- Parameters:
+    * `game` (`Game`): A Game object that has already been played.
 
-Returns:  
-* Initializes the Analyzer object.
-
----
+- Returns:  
+    * Initializes the Analyzer object.
 
 `jackpot()`
 
-Docstring:  
-* Computes how many times the game resulted in a jackpot where a jackpot is a result in which all faces are the same, e.g., all ones for a six-sided die.
+- Docstring:  
+    * Computes how many times the game resulted in a jackpot where a jackpot is a result in which all faces are the same, e.g., all ones for a six-sided die.
 
-Parameters:
-* None.
+- Parameters:
+    * None.
 
-Returns:  
-* Returns an integer for the number of jackpots.
-
----
+- Returns:  
+    * Returns an integer for the number of jackpots.
 
 `face_count()`
 
-Docstring:  
-* Computes how many times a given face is rolled in each event.
+- Docstring:  
+    * Computes how many times a given face is rolled in each event.
 
-Parameters:
-* None.
+- Parameters:
+    * None.
 
-Returns:  
-* Returns a DataFrame with the index as the roll number, face values as columns, and count values in the cells.
-
----
+- Returns:  
+    * Returns a DataFrame with the index as the roll number, face values as columns, and count values in the cells.
 
 `combo_count()`
 
-Docstring:  
-* Computes the distinct combinations of faces rolled, along with their counts.
+- Docstring:  
+    * Computes the distinct combinations of faces rolled, along with their counts.
 
-Parameters:
-* None.
+- Parameters:
+    * None.
 
-Returns:  
-* Returns a DataFrame of the MultiIndex of distinct combinations and a column for the associated counts.
-
----
+- Returns:  
+    * Returns a DataFrame of the MultiIndex of distinct combinations and a column for the associated counts.
 
 `permutation_count()`
 
-Docstring:  
-* Computes the distinct permutations of faces rolled, along with their counts.
+- Docstring:  
+    * Computes the distinct permutations of faces rolled, along with their counts.
 
-Parameters:
-* None.
+- Parameters:
+    * None.
 
-Returns:  
-* Returns a DataFrame of the MultiIndex of distinct permutations and a column for the associated counts.
+- Returns:  
+    * Returns a DataFrame of the MultiIndex of distinct permutations and a column for the associated counts.
