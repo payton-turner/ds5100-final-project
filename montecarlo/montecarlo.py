@@ -28,7 +28,7 @@ class Die():
             'Weights': np.ones(len(sides))},
         index=sides)
         
-    def weigh(self, side, weight: Union[int, float]):
+    def weigh(self, side: Union[int, float, str], weight: Union[int, float]):
         """
         Change the weight of a single side.
         
