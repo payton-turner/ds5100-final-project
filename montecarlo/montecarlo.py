@@ -7,10 +7,6 @@ class Die():
     A class representing a 'N' sided die with 'W' weights, and can be rolled to select a face.
     
     For example, a fair “die” with N=2 is a coin, and a one with N=6 is a standard die. An unfair die is one where the weights are unequal.
-    
-    Attributes:
-        sides (NumPy array): Array of sides as an argument, with data type as strings or numbers.
-        __weightings (Pandas Data Frame): Data Frame with each of the sides of the die as the index and initializes the weights to  1.0 for each face but can be changed after the object is created. The weights are just positive numbers (integers or floats, including 0).
         
     Methods:
         weigh(): Change the weight of a single side.
@@ -33,7 +29,7 @@ class Die():
         Change the weight of a single side.
         
         Args:
-            face (int, float, or str): The side value to be changed.
+            side (int, float, or str): The side value to be changed.
             weight (integer or float): The new weight for the given side.
         
         Returns:
@@ -91,10 +87,7 @@ class Game():
     Play a game of rolling one or more similar dice, one or more times.
     
     Similar dice means that each die in a given game has the same number of sides and associated faces, but each die object may have its own weights. Game objects have a behavior to play a game, i.e. to roll all of the dice a given number of times.
-    
-    Attributes:
-        dice (Python list): List of already instantiated similar dice from  the Die Class.
-        __games (Pandas Data Frame): Saves the results from the play.
+
         
     Methods:
         play(): A method to play a number of games with the die.
@@ -145,7 +138,6 @@ class Game():
             raise ValueError("The user can only request 'narrow' or 'wide' Data Frame format.")
         
         if display.lower() == 'wide':
-            wide = self.__games.copy().index.name
             return self.__games.copy()
         if display.lower() == 'narrow':
             narrow = self.__games.stack().to_frame('Face Rolled')
@@ -155,9 +147,6 @@ class Game():
 class Analyzer():
     """
      Takes the results of a single game and computes various descriptive statistical properties about it.
-        
-    Attributes:
-        game (object): Takes a game object already instanciated as its input parameter.
         
     Methods:
         jackpot(): Computes how many times the game resulted in a jackpot where a jackpot is a result in which all faces are the same.
@@ -183,13 +172,7 @@ class Analyzer():
         """  
         return (self.results.nunique(axis=1) == 1).sum()
         
-        # jackpot_count = 0
-        # for i, row in self.results.iterrows():
-        #     if row.nunique() == 1:
-        #         jackpot_count += 1
-        # return jackpot_count
-        
-    def face_count(self): # does this need to create columns for things that were never rolled???
+    def face_count(self):
         """
         Computes how many times a given face is rolled in each event.
         
@@ -197,7 +180,7 @@ class Analyzer():
             None.
         
         Returns:
-            Returns a data frame with the index as the roll number, face values as columns, and count values in the cells.
+            Returns a data frame with the index as the roll number, face values as columns, and count values in the cells. Returns all faces, even if zero.
         """  
         face_counts = self.results.apply(pd.value_counts, axis=1)
         face_counts = face_counts.fillna(0).astype(int)

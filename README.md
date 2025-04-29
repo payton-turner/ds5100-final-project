@@ -238,7 +238,7 @@ Takes the results of a single game and computes various descriptive statistical 
     * None.
 
 - Returns:  
-    * Returns a DataFrame of the MultiIndex of distinct combinations and a column for the associated counts.
+    * Returns a DataFrame of the MultiIndex of distinct combinations and a column for the associated counts. Returns all faces, even if zero.
 
 `permutation_count()`
 
