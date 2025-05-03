@@ -43,7 +43,7 @@ class Die():
         except (ValueError, TypeError):
             raise TypeError(f"Takes a numeric or castable to numeric value as an argument, got {type(weight)}.")
         
-        self.__weightings.at[side, 'Weights'] = weight
+        self.__weightings.loc[side, 'Weights'] = weight
         
     def roll(self, rolls: int = 1):
         """

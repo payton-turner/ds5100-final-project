@@ -4,8 +4,16 @@ import pandas as pd
 from montecarlo.montecarlo import Die, Game, Analyzer
     
 class DieTestSuite(unittest.TestCase):
-    
-    def test_1_weigh_change(self): 
+
+    def test_1_init_non_array(self):
+        test_list = [1, 2, 3, 4, 5, 6]
+        self.assertRaises(TypeError, Die, test_list)
+
+    def test_2_init_non_unique(self):
+        array = np.array([1, 2, 3, 3, 5, 6])
+        self.assertRaises(ValueError, Die, array)
+
+    def test_3_weigh_change(self): 
         # create a six-sided die and change on of the side's weight
         array = np.array([1, 2, 3, 4, 5, 6])
         test_object = Die(array)
@@ -13,7 +21,7 @@ class DieTestSuite(unittest.TestCase):
         expected_weights = [1, 1, 1, 1, 1, 5]
         self.assertEqual(test_object.state()['Weights'].tolist(), expected_weights)
         
-    def test_2_weigh_change_castable(self): 
+    def test_4_weigh_change_castable(self): 
         # create a six-sided die and change on of the side's weight with a castable string 
         array = np.array([1, 2, 3, 4, 5, 6])
         test_object = Die(array)
@@ -21,43 +29,43 @@ class DieTestSuite(unittest.TestCase):
         expected_weights = [1, 1, 1, 1, 1, 5]
         self.assertEqual(test_object.state()['Weights'].tolist(), expected_weights)
 
-    def test_3_weigh_change_nonexistent(self): 
+    def test_5_weigh_change_nonexistent(self): 
         # create a six-sided die and try to change a non-existent side's  weight
         array = np.array([1, 2, 3, 4, 5, 6])
         test_object = Die(array)
         self.assertRaises(IndexError, test_object.weigh, 10, 5)
 
-    def test_4_weigh_change_noncastable(self): 
+    def test_6_weigh_change_noncastable(self): 
         # create a six-sided die and change on of the side's weight with a non-castable string 
         array = np.array([1, 2, 3, 4, 5, 6])
         test_object = Die(array)
         self.assertRaises(TypeError, test_object.weigh, 6, 'five')
     
-    def test_5_roll_die(self): 
+    def test_7_roll_die(self): 
         # check length of list is equal to number of rolls
         array = np.array([1, 2, 3, 4, 5, 6])
         test_object = Die(array)
         self.assertEqual(len(test_object.roll(5)), 5)
    
-    def test_6_roll_die_noninteger(self): 
+    def test_8_roll_die_noninteger(self): 
         # try to roll a die a non-integer number of times
         array = np.array([1, 2, 3, 4, 5, 6])
         test_object = Die(array)
         self.assertRaises(TypeError, test_object.roll, 5.5)
 
-    def test_7_roll_die_zero(self): 
+    def test_9_1_roll_die_zero(self): 
         # try to roll a die 0 times
         array = np.array([1, 2, 3, 4, 5, 6])
         test_object = Die(array)
         self.assertRaises(ValueError, test_object.roll, 0)
 
-    def test_8_state_type(self): 
+    def test_9_2_state_type(self): 
         # make sure state returns a DataFrame
         array = np.array([1, 2, 3, 4, 5, 6])
         test_object = Die(array)
         self.assertIsInstance(test_object.state(), pd.DataFrame)
     
-    def test_9_state_shape(self): 
+    def test_9_3_state_shape(self): 
         # make sure state returns a DataFrame of the right shape
         array = np.array([1, 2, 3, 4, 5, 6])
         test_object = Die(array)
